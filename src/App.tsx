@@ -1,56 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { Button } from '@material-ui/core';
+import { useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import cityApi from './api/cityApi';
+import { useAppDispatch } from './app/hooks';
+import { NotFound, PrivateRoute } from './components/Common';
+import { AdminLayout } from './components/Layout';
+import { authActions } from './features/auth/authSlice';
+import LoginPage from './features/auth/pages/LoginPage';
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    cityApi.getAll().then((response) => {
+      console.log(response);
+    });
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <Button variant="contained" color="primary" onClick={() => dispatch(authActions.logout())}>
+        Log out
+      </Button>
+      <Switch>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+
+        <PrivateRoute path="/admin">
+          <AdminLayout />
+        </PrivateRoute>
+
+        <Route>
+          <NotFound />
+        </Route>
+      </Switch>
     </div>
   );
 }
