@@ -1,4 +1,5 @@
 export interface Item {
+  id: string | number;
   property: {
     title: string;
     to: string;

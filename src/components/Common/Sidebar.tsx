@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function RenderItemLink(props: Item) {
-  const { className, property } = props;
+  const { className, property, id } = props;
   return (
-    <NavLink to={property.to} className={className}>
+    <NavLink to={property.to} className={className} key={id}>
       <ListItem button>
         <ListItemIcon>{<property.icon />}</ListItemIcon>
         <ListItemText primary={property.title} />
@@ -43,8 +43,8 @@ export function Sidebar() {
   return (
     <div className={classes.root}>
       <List component="nav" aria-label="main mailbox folders">
-        {ListItemMenu.map((element) =>
-          RenderItemLink({ property: element, className: classes.link })
+        {ListItemMenu.map((element, idx) =>
+          RenderItemLink({ property: element, className: classes.link, id: idx })
         )}
       </List>
     </div>

@@ -73,8 +73,11 @@ function* fetchDashboardData() {
       call(fetchLowestStudentList),
       call(fetchRankingByCityList),
     ]);
+
+    yield put(dashboardActions.fetchDataSuccess());
   } catch (error) {
     console.log(error);
+    yield put(dashboardActions.fetchDataFailed());
   }
 }
 
