@@ -78,20 +78,39 @@ export default function Dashboard(props: IDashboardProps) {
       </Grid>
 
       {/* All student ranking */}
-      <Box mt={4}>
+      <Box style={{ marginTop: '40px' }}>
         <Typography variant="h4">All student</Typography>
 
-        <Box component="span" sx={{ marginTop: 16 }}>
+        <Box style={{ marginTop: '16px' }}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={3}>
               <Widget title="Student with highest mark">
-                <StudentRankingList />
+                <StudentRankingList studentList={highestStudentList} />
               </Widget>
             </Grid>
 
             <Grid item xs={12} md={6} lg={3}>
-              <Widget title="Student with lowest mark">Lowest</Widget>
+              <Widget title="Student with lowest mark">
+                <StudentRankingList studentList={lowestStudentList} />
+              </Widget>
             </Grid>
+          </Grid>
+        </Box>
+      </Box>
+
+      {/* Ranking by city */}
+      <Box style={{ marginTop: '40px' }}>
+        <Typography variant="h4">Ranking by city</Typography>
+
+        <Box style={{ marginTop: '16px' }}>
+          <Grid container spacing={3}>
+            {rankingByCityList.map((ranking) => (
+              <Grid key={ranking.cityId} item xs={12} md={6} lg={3}>
+                <Widget title={ranking.cityName}>
+                  <StudentRankingList studentList={ranking.rankingList} />
+                </Widget>
+              </Grid>
+            ))}
           </Grid>
         </Box>
       </Box>
