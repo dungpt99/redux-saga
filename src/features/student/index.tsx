@@ -16,7 +16,7 @@ export default function StudentFeature(props: IStudentFeatureProps) {
         <AddEditPage />
       </Route>
       <Route path={`${match.path}/:studentId`}>
-        <ListPage />
+        <AddEditPage />
       </Route>
     </Switch>
   );
