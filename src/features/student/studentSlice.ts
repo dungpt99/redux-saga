@@ -1,12 +1,12 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ListParams, ListResponse, PaginationParams, Student } from '../../models';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+import { ListParams, PaginationParams, Student } from '../../models';
 
 export interface StudentState {
   loading: boolean;
   list: Student[];
-  filter?: ListParams;
-  pagination?: PaginationParams;
+  filter: ListParams;
+  pagination: PaginationParams;
 }
 
 const initialState: StudentState = {
