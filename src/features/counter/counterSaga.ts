@@ -1,6 +1,6 @@
-import { delay, put, takeEvery, takeLatest } from 'redux-saga/effects';
-import { incrementSaga, incrementSagaSuccess } from './counterSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { delay, put, takeLatest } from 'redux-saga/effects';
+import { incrementSaga, incrementSagaSuccess } from './counterSlice';
 
 function* handleIncrementSaga(action: PayloadAction<number>) {
   // Wait 2s
